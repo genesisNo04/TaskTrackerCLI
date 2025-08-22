@@ -1,5 +1,7 @@
 # Task Tracker CLI
 
+project url: https://github.com/genesisNo04/TaskTrackerCLI
+
 A simple **Command Line Interface (CLI) task tracker** written in Java. This tool allows you to manage tasks with statuses like **to do**, **in progress**, and **done**, all from your terminal.
 
 ---
