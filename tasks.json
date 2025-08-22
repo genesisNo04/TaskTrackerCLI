@@ -1,0 +1,31 @@
+[ {
+  "id" : 1,
+  "status" : "not done",
+  "description" : "eat breakfast",
+  "createdAt" : "2025-08-21T21:03:38.4181415",
+  "updateAt" : "2025-08-21T21:03:38.4191394"
+}, {
+  "id" : 2,
+  "status" : "not done",
+  "description" : "work out",
+  "createdAt" : "2025-08-21T21:03:49.8587571",
+  "updateAt" : "2025-08-21T21:03:49.8607568"
+}, {
+  "id" : 4,
+  "status" : "done",
+  "description" : "reading",
+  "createdAt" : "2025-08-21T21:04:19.8213801",
+  "updateAt" : "2025-08-21T21:04:19.823381"
+}, {
+  "id" : 5,
+  "status" : "done",
+  "description" : "brush teeth",
+  "createdAt" : "2025-08-21T21:11:29.2954346",
+  "updateAt" : "2025-08-21T21:11:29.2969432"
+}, {
+  "id" : 6,
+  "status" : "in progress",
+  "description" : "leetcode study",
+  "createdAt" : "2025-08-21T21:30:26.5380098",
+  "updateAt" : "2025-08-21T21:30:26.5390105"
+} ]
