@@ -19,17 +19,18 @@ public class Main {
 
         switch (command) {
             case "add":
-                if (args.length < 3) {
+                if (args.length < 2) {
                     System.out.println("Error: Missing task description.");
                 } else {
+                    String status = (args.length > 2) ? args[2] : null;
                     Task task = new Task();
                     task.setId(1L);
                     task.setDescription(args[1]);
-                    task.setStatus(args[2]);
+                    task.setStatus(status == null ? "to do" : status);
                     task.setCreatedAt(LocalDateTime.now());
                     task.setUpdateAt(LocalDateTime.now());
                     taskService.addTask(task);
-                    System.out.println("Task added: " + args[1] + ", status: " + args[2]);
+                    System.out.println("Task added: " + args[1] + ", status: " + task.getStatus());
                 }
                 break;
             case "delete":
@@ -49,6 +50,31 @@ public class Main {
                     taskService.updateTask(id, description);
                 }
                 break;
+            case "mark-to-do":
+                if (args.length < 2) {
+                    System.out.println("Error: missing task id");
+                } else {
+                    Long id = Long.parseLong(args[1]);
+                    taskService.markToDo(id);
+                }
+                break;
+            case "mark-in-progress":
+                if (args.length < 2) {
+                    System.out.println("Error: missing task id");
+                } else {
+                    Long id = Long.parseLong(args[1]);
+                    taskService.markInProgress(id);
+                }
+                break;
+            case "mark-done":
+                if (args.length < 2) {
+                    System.out.println("Error: missing task id");
+                } else {
+                    Long id = Long.parseLong(args[1]);
+                    taskService.markDone(id);
+                }
+                break;
+
             case "list":
                 if (args.length == 1) {
                     taskService.listAllTask();
@@ -61,8 +87,8 @@ public class Main {
                         case "in progress":
                             taskService.listAllInProgress();
                             break;
-                        case "not done":
-                            taskService.listAllNotDone();
+                        case "to do":
+                            taskService.listAllToDo();
                             break;
                         default:
                             System.out.println("Invalid Status: " + status);
@@ -76,7 +102,7 @@ public class Main {
                 System.out.println("  add <task>    - Add a new task");
                 System.out.println("  list          - List all tasks");
                 System.out.println("  list <status> - List all tasks");
-                System.out.println("  available status - done, in progress, not done, \"\"");
+                System.out.println("  available status - todo, done, in progress\"\"");
                 System.out.println("  help          - Show help");
                 break;
 

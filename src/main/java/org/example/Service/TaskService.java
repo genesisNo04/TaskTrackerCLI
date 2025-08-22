@@ -14,15 +14,25 @@ import java.util.List;
 
 public class TaskService {
 
+    //Create a file name to save all the record
     private static final String JSON_FILE = "tasks.json";
+
+    //ObjectMapper to map java object to json
     private static final ObjectMapper mapper;
 
+    //instantiate the object
     static {
         mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
+    /**
+     * LoadTask method for loading all the record in the store file
+     *
+     * @return a List of Task objects representing all tasks currently stored.
+     *         Returns an empty list if the file does not exist, is empty, or an error occurs.
+     */
     public List<Task> loadTask() {
         File file = new File(JSON_FILE);
         if (!file.exists() || file.length() == 0) {
@@ -37,6 +47,10 @@ public class TaskService {
         }
     }
 
+    /**
+     * addTask method for adding new task which can have status or not and save to json file
+     *
+     */
     public void addTask(Task task) {
         List<Task> currentList = loadTask();
         if (currentList.size() == 0) {
@@ -54,6 +68,9 @@ public class TaskService {
         }
     }
 
+    /**
+     * addList method use to add a whole list of task and overwrite the task in the file
+     */
     public void addList(List<Task> list) {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_FILE), list);
@@ -62,6 +79,9 @@ public class TaskService {
         }
     }
 
+    /**
+     * updateTask method for searching a task and update the task and save to stored file
+     */
     public void updateTask(Long id, String description) {
         List<Task> currentList = loadTask();
         Task currentTask = null;
@@ -85,6 +105,9 @@ public class TaskService {
         }
     }
 
+    /**
+     * deleteTask method to delete task from the stored file
+     */
     public void deleteTask(Long id) {
         List<Task> currentList = loadTask();
         Task currentTask = currentList.stream().filter(task -> task.getId().equals(id)).findFirst().orElse(null);
@@ -98,23 +121,80 @@ public class TaskService {
         addList(currentList);
     }
 
+    /**
+     * ListAllTask list all task no consider any status
+     */
     public void listAllTask() {
         List<Task> currentList = loadTask();
-        currentList.stream().forEach(task -> System.out.println(task));
+        currentList.forEach(System.out::println);
     }
 
+    /**
+     * ListAllDone list all task in done status
+     */
     public void listAllDone() {
         List<Task> currentList = loadTask();
-        currentList.stream().filter(task -> task.getStatus().equals("done")).forEach(task -> System.out.println(task));
+        currentList.stream().filter(task -> task.getStatus().equals("done")).forEach(System.out::println);
     }
 
-    public void listAllNotDone() {
+    /**
+     * ListAllToDo list all task in to do status
+     */
+    public void listAllToDo() {
         List<Task> currentList = loadTask();
-        currentList.stream().filter(task -> task.getStatus().equals("not done")).forEach(task -> System.out.println(task));
+        currentList.stream().filter(task -> task.getStatus().equals("to do")).forEach(System.out::println);
     }
 
+    /**
+     * ListAllInProgress list all task in progress status
+     */
     public void listAllInProgress() {
         List<Task> currentList = loadTask();
-        currentList.stream().filter(task -> task.getStatus().equals("in progress")).forEach(task -> System.out.println(task));
+        currentList.stream().filter(task -> task.getStatus().equals("in progress")).forEach(System.out::println);
+    }
+
+    /**
+     * markInProgress mark a task in progress status
+     */
+    public void markInProgress(Long id) {
+        List<Task> currentList = loadTask();
+        Task currentTask = currentList.stream().filter(task -> task.getId().equals(id)).findFirst().orElse(null);
+        if (currentTask != null) {
+            currentTask.setStatus("in progress");
+            addList(currentList);
+        } else {
+            System.out.println("Task not found");
+        }
+
+    }
+
+    /**
+     * markDone mark task done status
+     */
+    public void markDone(Long id) {
+        List<Task> currentList = loadTask();
+        Task currentTask = currentList.stream().filter(task -> task.getId().equals(id)).findFirst().orElse(null);
+
+        if (currentTask != null) {
+            currentTask.setStatus("done");
+            addList(currentList);
+        } else {
+            System.out.println("Task not found");
+        }
+    }
+
+    /**
+     * markToDo mark task in todo status
+     */
+    public void markToDo(Long id) {
+        List<Task> currentList = loadTask();
+        Task currentTask = currentList.stream().filter(task -> task.getId().equals(id)).findFirst().orElse(null);
+
+        if (currentTask != null) {
+            currentTask.setStatus("to do");
+            addList(currentList);
+        } else {
+            System.out.println("Task not found");
+        }
     }
 }

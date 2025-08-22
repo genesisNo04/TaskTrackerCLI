@@ -1,12 +1,12 @@
 [ {
   "id" : 1,
-  "status" : "not done",
+  "status" : "to do",
   "description" : "eat breakfast",
   "createdAt" : "2025-08-21T21:03:38.4181415",
   "updateAt" : "2025-08-21T21:03:38.4191394"
 }, {
   "id" : 2,
-  "status" : "not done",
+  "status" : "to do",
   "description" : "work out",
   "createdAt" : "2025-08-21T21:03:49.8587571",
   "updateAt" : "2025-08-21T21:03:49.8607568"
@@ -28,4 +28,16 @@
   "description" : "leetcode study",
   "createdAt" : "2025-08-21T21:30:26.5380098",
   "updateAt" : "2025-08-21T21:30:26.5390105"
+}, {
+  "id" : 7,
+  "status" : "to do",
+  "description" : "running for 10 mins",
+  "createdAt" : "2025-08-22T16:20:06.9137942",
+  "updateAt" : "2025-08-22T16:20:06.9163052"
+}, {
+  "id" : 8,
+  "status" : "to do",
+  "description" : "running for 10 mins",
+  "createdAt" : "2025-08-22T16:21:07.8914319",
+  "updateAt" : "2025-08-22T16:21:07.8924364"
 } ]
